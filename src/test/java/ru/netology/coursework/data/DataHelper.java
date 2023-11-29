@@ -116,12 +116,5 @@ public class DataHelper {
         return faker.numerify("##");
     }
 
-    @Value
-    public static class CardInfo {
-        String number;
-        String year;
-        String month;
-        String holder;
-        String cvc;
-    }
+
 }

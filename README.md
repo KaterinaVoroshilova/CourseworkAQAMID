@@ -20,7 +20,12 @@ Git, браузер Google Chrome, InetelliJ IDEA, Docker Desktop.
 * *Открыть терминал в InetelliJ IDEA*
 * *Набрать команду docker-compose up и нажать на кнопку enter*
 * *После того, как появится надпись ready for connections, открыть еще одно окно терминала и с помощью команды java -jar aqa-shop.jar -P: jdbc.url=jdbc:mysql://127.0.0.1:3306/app либо java -jar aqa-shop.jar -P: jdbc.url=jdbc:postgresql://127.0.0.1:5432/app  запустить jar файл и нажать на кнопку enter*
-* *После этого можно запускать авто-тесты. (Открыть новое окно терминала и прописать команду ./gradlew clean test и нажать на кнопку enter)*
+* *После этого можно запускать авто-тесты. (Открыть новое окно терминала и прописать команду  ./gradlew clean test -D db.url=jdbc:mysql://localhost:3306/app для запуска под MySQl b  ./gradlew clean test -D db.url=jdbc:postgresql://localhost:5432/app для запуска под PostgreSQL и нажать на кнопку enter)*
+
+
+* [План автоматизации](https://github.com/KaterinaVoroshilova/CourseworkAQAMID/blob/main/docs/Plan.md)
+* [Отчет по итогам тестирования](https://github.com/KaterinaVoroshilova/CourseworkAQAMID/blob/main/docs/Report.md)
+* [Отчет по итогам автоматизации](https://github.com/KaterinaVoroshilova/CourseworkAQAMID/blob/main/docs/Summary.md)
 
 ### Бэйдж сборки
 [![Build status](https://ci.appveyor.com/api/projects/status/apnt7ly94fvrw4rx?svg=true)](https://ci.appveyor.com/project/KaterinaVoroshilova/courseworkaqamid)
