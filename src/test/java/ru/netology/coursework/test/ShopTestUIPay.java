@@ -38,7 +38,7 @@ public class ShopTestUIPay {
     @Test
     @DisplayName("Should approved pay")
     void shouldApprovedPay() {
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationSuccessVisible();
         Assertions.assertEquals("APPROVED", SQLHelper.getStatusPay());
     }
@@ -46,7 +46,7 @@ public class ShopTestUIPay {
     @Test
     @DisplayName("Should declined pay")
     void shouldDeclinedPay() {
-        payment.putData(DataHelper.getDeclinedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getDeclinedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationFailedVisible();
         Assertions.assertEquals("DECLINED", SQLHelper.getStatusPay());
     }
@@ -55,7 +55,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay nullCard")
     void shouldNotPayNullCard() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getNullCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getNullCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationFailedVisible();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -73,7 +73,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay empty form")
     void shouldNotPayEmptyForm() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData("","","","","");
+        payment.putData("", "", "", "", "");
         payment.waitNotificationWrongFormatCard();
         payment.waitNotificationWrongFormatMonth();
         payment.waitNotificationWrongFormatYear();
@@ -86,7 +86,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay empty CardNumber")
     void shouldNotPayEmptyCardNumber() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData("", DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData("", DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatCard();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -95,7 +95,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay expired card in last month")
     void shouldNotPayExpiredCardInLastMonth() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateLastMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateLastMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationValidityError();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -104,7 +104,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with month equal 13")
     void shouldNotPayWithMonthEqual13() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), "13", DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), "13", DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationValidityError();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -113,7 +113,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with month equal 00")
     void shouldNotPayWithMonthEqual00() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), "00", DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), "00", DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationValidityError();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -122,7 +122,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with empty month")
     void shouldNotPayWithEmptyMoth() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), "", DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), "", DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatMonth();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -131,7 +131,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with unValid month")
     void shouldNotPayWithUnValidMoth() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateUnValidMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateUnValidMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatMonth();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -140,7 +140,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay expired card in last year")
     void shouldNotPayExpiredCardInLastYear() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateLastYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateLastYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationCardExpiredError();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -149,7 +149,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with empty year")
     void shouldNotPayWithEmptyYear() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), "", DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), "", DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatYear();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -158,7 +158,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with unValid year")
     void shouldNotPayWithUnValidYear() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateUnValidYear(), DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateUnValidYear(), DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatYear();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -167,7 +167,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with empty holder")
     void shouldNotPayWithEmptyHolder() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "", DataHelper.generateValidCVV());
         payment.waitNotificationEmptyHolderError();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -176,7 +176,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder cyrillic")
     void shouldNotPayWithHolderCyrillic() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getUnValidHolderCyr(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getUnValidHolderCyr(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -185,7 +185,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with space in the start")
     void shouldNotPayWithHolderWithSpaceInStart() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), " " + DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), " " + DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -194,7 +194,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with dot in the start")
     void shouldNotPayWithHolderWithDotInStart() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "." + DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "." + DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -203,7 +203,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with hyphen in the start")
     void shouldNotPayWithHolderWithHyphenInStart() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "-" + DataHelper.getValidHolder(),DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "-" + DataHelper.getValidHolder(), DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -212,7 +212,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with space in the end")
     void shouldNotPayWithHolderWithSpaceInTheEnd() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + " ",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + " ", DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -221,15 +221,16 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with dot in the end")
     void shouldNotPayWithHolderWithDotInTheEnd() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + ".",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + ".", DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
+
     @Test
     @DisplayName("Should not pay with holder with hyphen in the end")
     void shouldNotPayWithHolderWithHyphenInTheEnd() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + "-",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + "-", DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -238,7 +239,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with number")
     void shouldNotPayWithHolderWithNumber() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + "1",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + "1", DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -247,7 +248,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder with special characters")
     void shouldNotPayWithHolderWithSpecialCharacters() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + "@",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder() + "@", DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -256,7 +257,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with holder equals one symbol")
     void shouldNotPayWithHolderEqualsOneSymbol() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "f",DataHelper.generateValidCVV());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), "f", DataHelper.generateValidCVV());
         payment.waitNotificationWrongFormatHolder();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -265,7 +266,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with empty CVC/CVV")
     void shouldNotPayWithEmptyCVC() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),"");
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), "");
         payment.waitNotificationWrongFormatCVV();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -274,7 +275,7 @@ public class ShopTestUIPay {
     @DisplayName("Should not pay with CVC/CVV as 2 numbers")
     void shouldNotPayWithCVCAs2Numbers() {
         String expectedId = SQLHelper.getIDPay();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),DataHelper.generateUnValidCVV2());
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), DataHelper.generateUnValidCVV2());
         payment.waitNotificationWrongFormatCVV();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }
@@ -284,8 +285,8 @@ public class ShopTestUIPay {
     void shouldNotPayWithCVCAs4Numbers() {
         String cvv4 = DataHelper.generateUnValidCVV4();
         String expectedCVV = cvv4.substring(0, 3);
-        String actualCVV = payment.putDataWithoutButtonClick(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), cvv4);
-        Assertions.assertEquals(expectedCVV, actualCVV);
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), cvv4);
+        payment.getCVVAssert(expectedCVV);
     }
 
     @Test
@@ -293,7 +294,7 @@ public class ShopTestUIPay {
     void shouldNotPayWithCVCAs2NumbersAndLetter() {
         String expectedId = SQLHelper.getIDPay();
         String cvv2 = DataHelper.generateUnValidCVV2();
-        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(),cvv2 + "f");
+        payment.putData(DataHelper.getApprovedCardNumber(), DataHelper.generateMonth(), DataHelper.generateYear(), DataHelper.getValidHolder(), cvv2 + "f");
         payment.waitNotificationWrongFormatCVV();
         Assertions.assertEquals(expectedId, SQLHelper.getIDPay());
     }

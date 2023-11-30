@@ -20,7 +20,6 @@ public class PaymentPage {
     private SelenideElement yearField =  $(".input [placeholder = '22']");
     private SelenideElement holderField = $$(".input__control").get(3);
     private SelenideElement CVCField = $(".input [placeholder = '999']").setValue(DataHelper.generateValidCVV());
-    private String getCVV = $(".input [placeholder = '999']").getValue();
 
 
     private SelenideElement approvedMessage =  $$(".notification__content").find(text("Операция одобрена Банком."));;
@@ -51,15 +50,8 @@ public class PaymentPage {
         continueButton.click();
     }
 
-    public String putDataWithoutButtonClick(String number, String month, String year, String holder, String CVC) {
-        cardNumber.setValue(number);
-        monthField.setValue(month);
-        yearField.setValue(year);
-        holderField.setValue(holder);
-        CVCField.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
-        CVCField.setValue(CVC);
-        String CVV = getCVV;
-        return CVV;
+    public void getCVVAssert(String expectedCVV) {
+        CVCField.shouldHave(value(expectedCVV));
     }
 
     public void waitNotificationSuccessVisible() {

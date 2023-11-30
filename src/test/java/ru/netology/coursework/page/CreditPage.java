@@ -15,21 +15,22 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class CreditPage {
 
-    private SelenideElement heading = $$("h3").get(1).shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText("Кредит по данным карты"));;
+    private SelenideElement heading = $$("h3").get(1).shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText("Кредит по данным карты"));
+    ;
     private SelenideElement cardNumber = $(".input [placeholder = '0000 0000 0000 0000']");
     private SelenideElement monthField = $(".input [placeholder = '08']");
-    private SelenideElement yearField =  $(".input [placeholder = '22']");
+    private SelenideElement yearField = $(".input [placeholder = '22']");
     private SelenideElement holderField = $$(".input__control").get(3);
     private SelenideElement CVCField = $(".input [placeholder = '999']").setValue(DataHelper.generateValidCVV());
     private String getCVV = $(".input [placeholder = '999']").getValue();
 
 
-    SelenideElement approvedMessage =  $$(".notification__content").find(text("Операция одобрена Банком."));
-    private SelenideElement errorMessage =  $$(" .notification__content").find(text("Ошибка! Банк отказал в проведении операции."));
+    SelenideElement approvedMessage = $$(".notification__content").find(text("Операция одобрена Банком."));
+    private SelenideElement errorMessage = $$(" .notification__content").find(text("Ошибка! Банк отказал в проведении операции."));
     private SelenideElement wrongFormatCard = $(byText("Неверный формат"));
     private SelenideElement wrongFormatMonth = $(byText("Неверный формат"));
     private SelenideElement wrongFormatYear = $(byText("Неверный формат"));
-    private SelenideElement validityError =$(byText("Неверно указан срок действия карты"));
+    private SelenideElement validityError = $(byText("Неверно указан срок действия карты"));
     private SelenideElement cardExpiredError = $(byText("Истёк срок действия карты"));
     private SelenideElement emptyHolderError = $(byText("Поле обязательно для заполнения"));
     private SelenideElement wrongFormatHolder = $(byText("Неверный формат"));
@@ -49,15 +50,9 @@ public class CreditPage {
         CVCField.setValue(CVC);
         continueButton.click();
     }
-    public String putDataWithoutButtonClick(String number, String month, String year, String holder, String CVC) {
-        cardNumber.setValue(number);
-        monthField.setValue(month);
-        yearField.setValue(year);
-        holderField.setValue(holder);
-        CVCField.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
-        CVCField.setValue(CVC);
-        String CVV = getCVV;
-        return CVV;
+
+    public void getCVVAssert(String expectedCVV) {
+        CVCField.shouldHave(value(expectedCVV));
     }
 
     public void waitNotificationSuccessVisible() {
@@ -95,6 +90,7 @@ public class CreditPage {
     public void waitNotificationWrongFormatHolder() {
         wrongFormatHolder.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldBe(visible);
     }
+
     public void waitNotificationWrongFormatCVV() {
         wrongFormatCVV.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldBe(visible);
     }
