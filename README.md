@@ -4,7 +4,7 @@
 
 ## Начало работы
 
-* Склонировать проект себе на ПК с помощью команды git-clone в терминале
+* Склонировать проект себе на ПК с помощью команды git clone git@github.com:KaterinaVoroshilova/CourseworkAQAMID.git в терминале
 
 ### Prerequisites
 Git, браузер Google Chrome, InetelliJ IDEA, Docker Desktop.
@@ -12,10 +12,10 @@ Git, браузер Google Chrome, InetelliJ IDEA, Docker Desktop.
 ###  Установка и запуск
 * *Установить Git на ПК. [Руководство по установке Git](https://netology-code.github.io/guides/git/)*
 * *Установить Google Chrome на ПК. [Руководство по установке Google Chrome](https://support.google.com/chrome/answer/95346?hl=RU&ref_topic=7439538)*
-* *Установить на ПК InetelliJ IDEA. [Руководство по установле InetelliJ IDEA ](https://harrix.dev/blog/2019/install-intellij-idea/)*
+* *Установить на ПК IntelliJ IDEA. [Руководство по установле InetelliJ IDEA ](https://harrix.dev/blog/2019/install-intellij-idea/)*
 * *Установить на ПК Docker Desktop. [Руководство по установке Docker](https://github.com/netology-code/aqa-homeworks/blob/master/docker/installation.md)*
 * *Запустить Docker Desktop*
-* *Запустить InetelliJ IDEA*
+* *Запустить IntelliJ IDEA*
 * *Открыть проект CourseworkAQAMID (File-Open-выбрать папку проекта)*
 * *Открыть терминал в InetelliJ IDEA*
 * *Набрать команду docker-compose up и нажать на кнопку enter*
